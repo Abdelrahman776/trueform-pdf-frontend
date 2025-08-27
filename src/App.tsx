@@ -1,11 +1,14 @@
 // import { useState } from 'react'
 
+import Navbar from "./components/Navbar"
+
 
 function App() {
 
   return (
     <>
-      <div className="text-6xl text-amber-700"> hello</div>
+      <Navbar />
+      
     </>
   )
 }
