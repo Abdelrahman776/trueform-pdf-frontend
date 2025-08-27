@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+
+
+@theme{
+
+--color-tforange:#e16B29;
+--color-tfblue:#0E4F88;
+--color-tfblack:#111111;
+--color-tfwhite:#F7F3EB;
+}
