@@ -33,7 +33,7 @@ export default function Footer() {
     <footer className="bg-tfwhite dark:bg-tfblack py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center">
-          <div className="text-2xl font-bold mb-4">
+          <div className="text-xl font-bold mb-4">
             <span className="text-tfblue dark:text-tfblue">TrueForm</span>
             <span className="text-tforange dark:text-tforange">PDF</span>
           </div>

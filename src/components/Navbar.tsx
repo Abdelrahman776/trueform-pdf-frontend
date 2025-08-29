@@ -44,7 +44,7 @@ export default function Navbar() {
                 <p>Credits: N/A</p>
               </button>
             </div>
-            <button className="px-6 py-2 rounded-2xl text-tfwhite dark:text-tfwhite bg-tfblue  hover:bg-gray-700 dark:hover:bg-gray-700  transition-colors flex items-center">
+            <button className="px-6 py-2 rounded-2xl text-tfwhite dark:text-tfwhite bg-tfblue  hover:bg-blue-950 transition-colors flex items-center">
               <LogIn className="mr-2 h-4 w-4 mt-0.5" />
               <span>Sign In</span>
             </button>
