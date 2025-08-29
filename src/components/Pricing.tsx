@@ -42,7 +42,7 @@ export default function Pricing() {
         <h2 className="text-tfblack dark:text-white font-bold text-4xl">
           Pricing
         </h2>
-        <p className="text-gray-700 dark:text-gray-300 text-sm">
+        <p className="text-gray-700 dark:text-gray-300 ">
           Simple tiers that scale with your needs.
         </p>
       </div>
@@ -85,7 +85,7 @@ export default function Pricing() {
 
               <button
                 onClick={() => handleCTAClick(index)}
-                className={`w-full py-3 rounded-lg text-white font-semibold transition-colors ${
+                className={`w-full py-3 rounded-lg text-tfwhite font-semibold transition-colors ${
                   index === 0 || index === 1 ? 'bg-tfblue hover:bg-blue-950' : 'bg-tforange hover:bg-orange-800'
                 }`}
               >
