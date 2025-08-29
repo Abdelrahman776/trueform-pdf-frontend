@@ -42,7 +42,7 @@ export default function Pricing() {
         <h2 className="text-tfblack dark:text-white font-bold text-4xl">
           Pricing
         </h2>
-        <p className="text-gray-700 dark:text-gray-300 ">
+        <p className="text-gray-700 dark:text-gray-300 text-lg ">
           Simple tiers that scale with your needs.
         </p>
       </div>
