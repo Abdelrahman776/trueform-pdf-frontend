@@ -1,37 +1,37 @@
 import React from "react";
-import { LayoutIcon, SearchIcon, FileTextIcon, PencilIcon } from "lucide-react";
+import { LayoutIcon, SearchIcon, Minimize, PencilIcon } from "lucide-react";
+
 export const Features: React.FC = () => {
   const features = [
     {
       title: "Smart Conversion",
       description: "Keeps the integrity of your original layout.",
-      icon: <LayoutIcon className="w-10 h-10 text-[#2A3A6A] dark:text-white" />,
+
+      icon: <LayoutIcon className="w-10 h-10 text-tfblack dark:text-tfwhite" />,
     },
     {
       title: "Searchable & Editable",
       description: "Your converted files can be searched, copied, and edited.",
-      icon: <SearchIcon className="w-10 h-10 text-[#2A3A6A] dark:text-white" />,
+      icon: <SearchIcon className="w-10 h-10 text-tfblack dark:text-tfwhite" />,
     },
     {
       title: "Compression",
       description:
         "Significant size reduction from image-based to truly digital PDFs (e.g., 20MB → 900KB).",
-      icon: (
-        <FileTextIcon className="w-10 h-10 text-[#2A3A6A] dark:text-white" />
-      ),
+      icon: <Minimize className="w-10 h-10 text-tfblack dark:text-tfwhite" />,
     },
     {
       title: "Handwritten Notes",
       description:
         "Supports the conversion of handwritten notes into digital text.",
-      icon: <PencilIcon className="w-10 h-10 text-[#2A3A6A] dark:text-white" />,
-    },
+      icon: <PencilIcon className="w-10 h-10 text-tfblack dark:text-tfwhite" />,
+    },  
   ];
   return (
-    <section className="py-16 bg-[#F7F3EB] dark:bg-[#111114]">
+    <section className="py-12 bg-tfwhite dark:bg-tfblack">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-[#2A3A6A] dark:text-white">
+          <h2 className="text-3xl font-bold text-tfblack dark:text-white">
             Key Features
           </h2>
           <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
@@ -43,15 +43,17 @@ export const Features: React.FC = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+              className="flex flex-col bg-tfwhite dark:bg-tfblack border border-tfblue/50 p-6 rounded-lg shadow-lg shadow-tfblue/20 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-tforange/20 hover:border-tforange"
             >
-              <div className="flex justify-center mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-bold text-center text-[#2A3A6A] dark:text-white mb-2">
-                {feature.title}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 text-center">
-                {feature.description}
-              </p>
+              <div className="flex justify-center mb-6">{feature.icon}</div>
+              <div className="flex-grow">
+                <h3 className="text-xl font-bold text-center text-tfblack dark:text-white mb-4">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 text-center">
+                  {feature.description}
+                </p>
+              </div>
             </div>
           ))}
         </div>
