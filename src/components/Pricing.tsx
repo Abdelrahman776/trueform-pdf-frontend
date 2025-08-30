@@ -28,10 +28,8 @@ export default function Pricing() {
   
   const handleCTAClick = (index: number) => {
     if (index === 0) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (index === 1) {
       console.log("logging in");
-    } else if (index === 2) {
+    } else if (index === 1) {
       console.log("paying 1 dollar");
     }
   };
@@ -83,7 +81,7 @@ export default function Pricing() {
               <button
                 onClick={() => handleCTAClick(index)}
                 className={`w-full py-3 rounded-lg text-tfwhite font-semibold transition-colors ${
-                  index === 0 || index === 1
+                  index === 0 
                     ? "bg-tfblue hover:bg-blue-950"
                     : "bg-tforange hover:bg-orange-800"
                 }`}
