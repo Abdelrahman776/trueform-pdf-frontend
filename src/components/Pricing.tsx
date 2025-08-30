@@ -2,17 +2,17 @@ import {Check} from "lucide-react"
 
 export default function Pricing() {
   const plans = [
-    {
-      name: "Anonymous",
-      price: "$0",
-      features: ["No account required", "1 file every 24 hours"],
-      cta: "Try free now",
-      highlighted: false,
-    },
+    // {
+    //   name: "Anonymous",
+    //   price: "$0",
+    //   features: ["No account required", "1 file every 24 hours"],
+    //   cta: "Try free now",
+    //   highlighted: false,
+    // },
     {
       name: "Registered",
       price: "$0",
-      features: ["Registration is free", "3 files every 24 hours"],
+      features: ["Registration is free", "2 files every 24 hours"],
       cta: "Register / Sign in",
       highlighted: false,
     },
