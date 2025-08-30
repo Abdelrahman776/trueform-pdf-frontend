@@ -25,6 +25,8 @@ export default function Hero() {
 
 
     return (<section>
-        heroo
+      
+       <UploadCloud className="w-10 h-10"></UploadCloud>
+       
     </section>)
 }
