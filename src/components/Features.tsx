@@ -1,7 +1,6 @@
-import React from "react";
 import { LayoutIcon, SearchIcon, Minimize, PencilIcon } from "lucide-react";
 
-export const Features: React.FC = () => {
+export default function Features() {
   const features = [
     {
       title: "Smart Conversion",
