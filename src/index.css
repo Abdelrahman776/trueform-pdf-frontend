@@ -10,14 +10,8 @@
 --color-tfwhite:#F7F3EB;
 }
 
-@font-face {
-    font-family: "Overused Grotesk";
-    src: url('https://raw.githubusercontent.com/RandomMaerks/Overused-Grotesk/master/fonts/variable/OverusedGroteskRoman-VF.ttf');
-    /* url("../fonts/OverusedGrotesk-VF.woff2") format("woff2-variations"); */
-    /* I can use my downloaded version */
-    font-weight: 400  900;
-}
+
 
 *{
-    font-family: "Overused Grotesk",system-ui, -apple-system,  'Helvetica Neue', sans-serif;
+    font-family: system-ui, -apple-system,  sans-serif;
 }

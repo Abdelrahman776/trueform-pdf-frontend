@@ -12,8 +12,8 @@ function App() {
   return (
     <>
       <Navbar />
-      <BeforeAfterSection />
       <Hero />
+      <BeforeAfterSection />
       <Features />
       <Pricing />
       <Footer />
