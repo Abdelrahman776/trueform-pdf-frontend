@@ -28,7 +28,7 @@ export default function BeforeAfter() {
             <img
               alt="Before processing"
               className="w-[400px] h-[400px] "
-              src="../../public/handwritten.webp"
+              src="handwritten.webp"
             ></img>
           </div>
 
@@ -46,7 +46,7 @@ export default function BeforeAfter() {
             <img
               alt="after processing, "
               className="w-[400px] h-[400px] "
-              src="../../public/converted.webp"
+              src="converted.webp"
             ></img>
           </div>
         </div>
