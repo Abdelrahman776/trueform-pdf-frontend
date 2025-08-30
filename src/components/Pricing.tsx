@@ -1,4 +1,4 @@
-import {Check} from "lucide-react"
+import { Check } from "lucide-react";
 
 export default function Pricing() {
   const plans = [
@@ -25,7 +25,6 @@ export default function Pricing() {
     },
   ];
 
-  
   const handleCTAClick = (index: number) => {
     if (index === 0) {
       console.log("logging in");
@@ -35,7 +34,7 @@ export default function Pricing() {
   };
 
   return (
-    <div className="bg-tfwhite dark:bg-tfblack py-12 border-b border-gray-200 dark:border-gray-900 ">
+    <section className="bg-tfwhite dark:bg-tfblack py-12 border-b border-gray-200 dark:border-gray-900 ">
       <div className="flex items-center justify-center flex-col gap-2 text-center">
         <h2 className="text-tfblack dark:text-white font-bold text-4xl">
           Pricing
@@ -44,12 +43,12 @@ export default function Pricing() {
           Simple tiers that scale with your needs.
         </p>
       </div>
-      <div className="cards-container flex flex-col md:flex-row justify-center items-center md:items-stretch gap-8 mt-12 mx-4">
+      <div className=" flex flex-col md:flex-row justify-center items-center gap-8 mt-12 mx-4">
         {plans.map((plan, index) => {
           return (
             <div
               key={index}
-              className={`card border rounded-lg p-6 flex flex-col text-center w-full md:w-1/3 ${
+              className={` border rounded p-6 flex flex-col text-center w-[80%] md:w-1/3 ${
                 plan.highlighted
                   ? "border-tforange shadow-lg shadow-tforange/40"
                   : "border-tfblue shadow-lg shadow-tfblue/20"
@@ -80,8 +79,8 @@ export default function Pricing() {
 
               <button
                 onClick={() => handleCTAClick(index)}
-                className={`w-full py-3 rounded-lg text-tfwhite font-semibold transition-colors ${
-                  index === 0 
+                className={`w-full py-3 rounded text-tfwhite font-semibold transition-colors ${
+                  index === 0
                     ? "bg-tfblue hover:bg-blue-950"
                     : "bg-tforange hover:bg-orange-800"
                 }`}
@@ -92,6 +91,6 @@ export default function Pricing() {
           );
         })}
       </div>
-    </div>
+    </section>
   );
 }
