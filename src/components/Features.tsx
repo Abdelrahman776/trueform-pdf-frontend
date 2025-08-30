@@ -5,7 +5,7 @@ export const Features: React.FC = () => {
   const features = [
     {
       title: "Smart Conversion",
-      description: "Keeps the integrity of your original layout.",
+      description: "Keeps the integrity of your original layout.",//colors and font family
 
       icon: <LayoutIcon className="w-10 h-10 text-tfblack dark:text-tfwhite" />,
     },
@@ -31,10 +31,10 @@ export const Features: React.FC = () => {
     <section className="py-12 bg-tfwhite dark:bg-tfblack">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-tfblack dark:text-white">
+          <h2 className="text-3xl font-bold text-tfblack dark:text-tfwhite">
             Key Features
           </h2>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="mt-4 text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
             TrueForm PDF offers powerful capabilities to transform your
             documents
           </p>
@@ -47,10 +47,10 @@ export const Features: React.FC = () => {
             >
               <div className="flex justify-center mb-6">{feature.icon}</div>
               <div className="flex-grow">
-                <h3 className="text-xl font-bold text-center text-tfblack dark:text-white mb-4">
+                <h3 className="text-xl font-bold text-center text-tfblack dark:text-tfwhite mb-4">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 text-center">
+                <p className="text-gray-700 dark:text-gray-300 text-center">
                   {feature.description}
                 </p>
               </div>
