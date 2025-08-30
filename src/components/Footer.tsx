@@ -10,7 +10,7 @@ export default function Footer() {
     },
     {
       name: "API Docs",
-      href: " https://www.google.com   ",
+      href: " api-docs",
       icon: <BookOpenIcon className="w-4 h-4" />,
     },
     {
