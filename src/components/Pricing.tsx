@@ -12,7 +12,7 @@ export default function Pricing() {
     {
       name: "Registered",
       price: "$0",
-      features: ["Registration is free", "2 files every 24 hours"],
+      features: ["Registration is free", "5 files every 24 hours"],
       cta: "Register / Sign in",
       highlighted: false,
     },
@@ -20,7 +20,7 @@ export default function Pricing() {
       name: "Pay-as-you-go",
       price: "$1",
       features: ["One-time purchase", "No subscription"],
-      cta: "Buy 10 credits",
+      cta: "Buy 30 credits",
       highlighted: true,
     },
   ];
