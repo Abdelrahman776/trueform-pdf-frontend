@@ -1,52 +1,126 @@
-import { useEffect, useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import React, { useEffect, useState } from "react";
+// import { useMutation } from "@tanstack/react-query";
 
 import { UploadCloud } from "lucide-react";
-import axios from "axios";
+// import axios from "axios";
 
+// async function uploadFile(file: File) {
+//   const endpoint = import.meta.env.SERVER_URL || "http://localhost:7777/";
+//   const formData = new FormData();
+//   formData.append("uploadedFile", file);
+//   const response = await axios.post(endpoint, formData);
 
-
-async function uploadFile(file:File) {
-    
-    const endpoint = import.meta.env.SERVER_URL || "http://localhost:7777/";
-    const formData = new FormData();
-    formData.append('uploadedFile', file);
-   const response= await axios.post(endpoint, formData)
-    
-return response.data
-}
+//   return response.data;
+// }
 
 function handleButtonClick() {
-
-    document.getElementById('file-input')?.click();
+  document.getElementById("file-input")?.click();
 }
-
-
 
 export default function Hero() {
-  // const [isProcessing, setIsProcessing] = useState(false);
-
+  const [isDragging, setIsDragging] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
+  //   const { mutate, isPending, data, error } =  useMutation(dd,uploadFile)
 
-    //   const { mutate, isPending, data, error } =  useMutation(dd,uploadFile)
-function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
-   const files = e.target.files;
-   if (files && files[0]) {
-     setFile(files[0]);
+  const handleFileInput = (file: File) => {
+    const validTypes = [
+      "application/pdf",
+      "image/jpeg",
+      "image/png",
+      "image/jpg",
+    ];
+    // console.log(file.type);
+    setMessage(null);
+    if (!validTypes.includes(file.type)) {
+      setMessage("Please upload a PDF, JPG, or PNG file.");
+      return;
+    }
+    setFile(file);
+    setIsProcessing(true);
+    setMessage(" is being processed");
+    // In a real app, you would handle the file upload and conversion here
 
-   }
-}
+    //   setIsProcessing(true);
+    setTimeout(() => {
+        setMessage(null);
+        setIsProcessing(false);
+        
+    }, 2000);
+  };
 
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const files = e.target.files;
+    if (files && files[0]) {
+      handleFileInput(files[0]);
+    }
+  }
 
+  //   function handleOnDragOver(e: DragEvent) {
+  //     e.preventDefault();
+  //     setIsDragging(true);
+  //   }
 
+  //   function handleOnDragLeave(e: DragEvent) {
+  //     e.preventDefault();
+  //     if (e.relatedTarget === null) {
+  //       setIsDragging(false);
+  //     }
+  //   }
 
+  //   function handleDrop(e: DragEvent) {
+  //     e.preventDefault();
+  //     setIsDragging(false);
+  //     if (e.dataTransfer?.files && e.dataTransfer.files.length > 0) {
+  //       handleFileInput(e.dataTransfer.files[0]);
+  //     }
+  //   }
 
-
-
-
+  useEffect(() => {
+    const handleDragOver = (e: DragEvent) => {
+      e.preventDefault();
+      setIsDragging(true);
+    };
+    const handleDragLeave = (e: DragEvent) => {
+      e.preventDefault();
+      if (e.relatedTarget === null) {
+        setIsDragging(false);
+      }
+    };
+    const handleDrop = (e: DragEvent) => {
+      e.preventDefault();
+      setIsDragging(false);
+      if (e.dataTransfer?.files && e.dataTransfer.files.length > 0) {
+        handleFileInput(e.dataTransfer.files[0]);
+      }
+    };
+    document.addEventListener("dragover", handleDragOver);
+    document.addEventListener("dragleave", handleDragLeave);
+    document.addEventListener("drop", handleDrop);
+    return () => {
+      document.removeEventListener("dragover", handleDragOver);
+      document.removeEventListener("dragleave", handleDragLeave);
+      document.removeEventListener("drop", handleDrop);
+    };
+  }, []);
 
   return (
     <section className="bg-tfwhite dark:bg-tfblack min-h-[85vh] pt-18 flex flex-col justify-start  gap-24">
+      {/* Drag overlay */}
+      {isDragging && (
+        <div className="fixed inset-0 bg-tfblue/20 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg text-center">
+            <UploadCloud className="w-16 h-16 mx-auto mb-4 text-tforange" />
+            <h2 className="text-2xl font-bold text-[#2A3A6A] dark:text-white">
+              Drop your file anywhere
+            </h2>
+            <p className="mt-2 text-gray-600 dark:text-gray-300">
+              We accept PDF, JPG, and PNG files
+            </p>
+          </div>
+        </div>
+      )}
       <div className="max-w-5xl mx-auto text-center">
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
           Unlock Your Document's{" "}
@@ -59,18 +133,61 @@ function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
         </p>
       </div>
 
-      <div className="panel flex items-center justify-center rounded-3xl w-[85%] sm:w-[60%] mx-auto bg-gray-200  dark:bg-gray-800  border-3 border-gray-400  dark:border-gray-700  border-dashed py-6">
+      <div
+        className="panel flex items-center justify-center rounded-3xl w-[85%] sm:w-[60%] mx-auto bg-gray-200  dark:bg-gray-800  border-3 border-gray-400  dark:border-gray-700  border-dashed py-6 "
+        onClick={handleButtonClick}
+      >
         <div className=" flex flex-col items-center justify-center px-6 ">
-                  <input type="file" id="file-input" className="hidden"
-                  onChange={handleFileChange}/>
+          <input
+            type="file"
+            id="file-input"
+            className="hidden"
+            onChange={handleFileChange}
+          />
           <button
-            className={`bg-tforange  md:text-xl text-white font-bold rounded-xl py-4 px-5 sm:px-10 flex items-center  flex-col focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tforange transition-colors
+            disabled={isProcessing}
+            className={`bg-tforange  md:text-xl text-white font-bold rounded-xl py-4 px-5 sm:px-10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tforange transition-colors cursor-pointer 
               `}
-            onClick={handleButtonClick}
           >
-            <UploadCloud className="w-6 h-6 md:w-9 md:h-9 inline"></UploadCloud>
-            Click here to convert a PDF!
+            {isProcessing ? (
+              <div className="flex items-center  flex-col ">
+                <svg
+                  className="animate-spin -ml-1 mr-2 h-9 w-9 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+                <span> Coverting...</span>
+              </div>
+            ) : (
+              <div className="flex items-center  flex-col ">
+                <UploadCloud className="w-6 h-6 md:w-9 md:h-9 inline"></UploadCloud>
+                <span> Click here to convert a PDF!</span>
+              </div>
+            )}
           </button>
+          {message && !isProcessing && (
+            <p className="mt-4 text-red-500 dark:text-red-400">{message}</p>
+          )}
+          {file && isProcessing && (
+            <p className="mt-4 text-green-500 dark:text-green-400">
+              File "{file.name}" {message}
+            </p>
+          )}
           <p
             className="mt-4  text-sm md:text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto
            "
