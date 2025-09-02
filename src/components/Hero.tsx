@@ -1,9 +1,47 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 
 import { UploadCloud } from "lucide-react";
-// const [isProcessing, setIsProcessing] = useState(false);
+import axios from "axios";
+
+
+
+async function uploadFile(file:File) {
+    
+    const endpoint = import.meta.env.SERVER_URL || "http://localhost:7777/";
+    const formData = new FormData();
+    formData.append('uploadedFile', file);
+   const response= await axios.post(endpoint, formData)
+    
+return response.data
+}
+
+function handleButtonClick() {
+
+    document.getElementById('file-input')?.click();
+}
+
+
 
 export default function Hero() {
+  // const [isProcessing, setIsProcessing] = useState(false);
+
+  const [file, setFile] = useState<File | null>(null);
+
+    //   const { mutate, isPending, data, error } =  useMutation(dd,uploadFile)
+function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+   const files = e.target.files;
+   if (files && files[0]) {
+     setFile(files[0]);
+
+   }
+}
+
+
+
+
+
+
 
 
 
@@ -23,9 +61,12 @@ export default function Hero() {
 
       <div className="panel flex items-center justify-center rounded-3xl w-[85%] sm:w-[60%] mx-auto bg-gray-200  dark:bg-gray-800  border-3 border-gray-400  dark:border-gray-700  border-dashed py-6">
         <div className=" flex flex-col items-center justify-center px-6 ">
+                  <input type="file" id="file-input" className="hidden"
+                  onChange={handleFileChange}/>
           <button
             className={`bg-tforange  md:text-xl text-white font-bold rounded-xl py-4 px-5 sm:px-10 flex items-center  flex-col focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tforange transition-colors
               `}
+            onClick={handleButtonClick}
           >
             <UploadCloud className="w-6 h-6 md:w-9 md:h-9 inline"></UploadCloud>
             Click here to convert a PDF!
