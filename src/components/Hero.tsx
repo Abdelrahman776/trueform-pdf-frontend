@@ -26,8 +26,9 @@ export default function Hero() {
   //   const { mutate, isPending, data, error } =  useMutation(dd,uploadFile)
 
   const handleFileInput = (file: File) => {
-    setMessage(null);
+    setFile(null);
     setIsProcessing(false);
+    setMessage(null);
     setIsConverted(false);
 
     const validTypes = [
@@ -84,7 +85,7 @@ export default function Hero() {
       e.preventDefault();
       dragCounter = 0;
       setIsDragging(false);
-      if ( e.dataTransfer?.files?.[0]) {
+      if (e.dataTransfer?.files?.[0]) {
         handleFileInput(e.dataTransfer.files[0]);
       }
     };
@@ -95,6 +96,7 @@ export default function Hero() {
     document.addEventListener("drop", handleDrop);
 
     return () => {
+      //removes the event listeners before the component unmounts (is removed from the DOM)
       document.removeEventListener("dragenter", handleDragEnter);
       document.removeEventListener("dragover", handleDragOver);
       document.removeEventListener("dragleave", handleDragLeave);
@@ -106,7 +108,7 @@ export default function Hero() {
     <section className="bg-tfwhite dark:bg-tfblack min-h-[85vh] pt-18 flex flex-col justify-start  gap-24">
       {/* Drag overlay */}
       {isDragging && (
-        <div className="fixed inset-0 bg-tfblue/20 backdrop-blur-sm flex items-center justify-center z-50">
+        <div className="fixed z-50 inset-0 backdrop-blur-sm bg-tfblue/20  flex items-center justify-center ">
           <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg text-center">
             <UploadCloud className="w-16 h-16 mx-auto mb-4 text-tforange" />
             <h2 className="text-2xl font-bold text-[#2A3A6A] dark:text-white">
@@ -143,7 +145,7 @@ export default function Hero() {
           />
           <button
             disabled={isProcessing}
-            className={`bg-tforange  md:text-xl text-white font-bold rounded-xl py-4 px-5 sm:px-10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tforange transition-colors cursor-pointer 
+            className={`bg-tforange  md:text-xl text-white font-bold rounded-xl py-4 px-5 sm:px-10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tforange transition-colors cursor-pointer hover:bg-orange-500
               `}
           >
             {isProcessing ? (
