@@ -29,7 +29,12 @@ export default function Navbar() {
         <div className="flex justify-between h-16">
           {/* logo and name *************************************************************** */}
           <div className="flex items-center  gap-1  ">
-            <img src="tf-pdf-logo.png" alt="tf pdf logo" className="w-9"></img>
+            <img
+              src="tf-pdf-logo.png"
+              alt="tf pdf logo"
+              draggable="false"
+              className="w-9 "
+            ></img>
             <div className="text-2xl font-bold">
               <span className="text-tfblue">TrueForm</span>
               <span className="text-tforange">PDF</span>

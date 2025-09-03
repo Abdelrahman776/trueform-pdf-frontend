@@ -26,12 +26,12 @@ export default function BeforeAfter() {
               </span>
             </div>
             <img
+              draggable="false"
               alt="Before processing"
               className="w-[400px] h-[400px] "
               src="handwritten.webp"
             ></img>
           </div>
-
 
           <div className="flex-col  mb-10">
             <div className="flex justify-start  gap-3 items-center mb-4">
@@ -44,6 +44,7 @@ export default function BeforeAfter() {
             </div>
 
             <img
+              draggable="false"
               alt="after processing, "
               className="w-[400px] h-[400px] "
               src="converted.webp"
