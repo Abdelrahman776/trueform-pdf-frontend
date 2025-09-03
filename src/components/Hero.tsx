@@ -21,61 +21,45 @@ export default function Hero() {
   const [isDragging, setIsDragging] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isConverted, setIsConverted] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   //   const { mutate, isPending, data, error } =  useMutation(dd,uploadFile)
 
-  const handleFileInput = (file: File) => {
-    const validTypes = [
-      "application/pdf",
-      "image/jpeg",
-      "image/png",
-      "image/jpg",
-    ];
-    // console.log(file.type);
-    setMessage(null);
-    if (!validTypes.includes(file.type)) {
-      setMessage("Please upload a PDF, JPG, or PNG file.");
-      return;
-    }
-    setFile(file);
-    setIsProcessing(true);
-    setMessage(" is being processed");
-    // In a real app, you would handle the file upload and conversion here
+  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
 
-    //   setIsProcessing(true);
-    setTimeout(() => {
-        setMessage(null);
+    if (files && files[0]) {
+      const file: File = files[0];
+
+      setMessage(null);
+      setIsProcessing(false);
+      setIsConverted(false);
+
+      const validTypes = [
+        "application/pdf",
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+      ];
+
+      if (!validTypes.includes(file.type)) {
+        setMessage("Please upload a PDF, JPG, or PNG file.");
+        return;
+      }
+      setFile(file);
+      setIsProcessing(true);
+      setMessage(`File ${file.name}" is being processed`);
+
+      // In a real app, you would handle the file upload and conversion here
+      setTimeout(() => {
+        setMessage(`File ${file.name}" processing is finished`);
         setIsProcessing(false);
-        
-    }, 2000);
+        setIsConverted(true);
+      }, 2000);
+    }
   };
 
-  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const files = e.target.files;
-    if (files && files[0]) {
-      handleFileInput(files[0]);
-    }
-  }
 
-  //   function handleOnDragOver(e: DragEvent) {
-  //     e.preventDefault();
-  //     setIsDragging(true);
-  //   }
-
-  //   function handleOnDragLeave(e: DragEvent) {
-  //     e.preventDefault();
-  //     if (e.relatedTarget === null) {
-  //       setIsDragging(false);
-  //     }
-  //   }
-
-  //   function handleDrop(e: DragEvent) {
-  //     e.preventDefault();
-  //     setIsDragging(false);
-  //     if (e.dataTransfer?.files && e.dataTransfer.files.length > 0) {
-  //       handleFileInput(e.dataTransfer.files[0]);
-  //     }
-  //   }
 
   useEffect(() => {
     const handleDragOver = (e: DragEvent) => {
@@ -142,7 +126,7 @@ export default function Hero() {
             type="file"
             id="file-input"
             className="hidden"
-            onChange={handleFileChange}
+            onChange={handleFileInput}
           />
           <button
             disabled={isProcessing}
@@ -152,7 +136,7 @@ export default function Hero() {
             {isProcessing ? (
               <div className="flex items-center  flex-col ">
                 <svg
-                  className="animate-spin -ml-1 mr-2 h-9 w-9 text-white"
+                  className="animate-spin -ml-1 mr-2 w-6 h-6 md:w-9 md:h-9  text-white"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -180,13 +164,14 @@ export default function Hero() {
               </div>
             )}
           </button>
-          {message && !isProcessing && (
+          {message && !isProcessing &&!isConverted && (
             <p className="mt-4 text-red-500 dark:text-red-400">{message}</p>
           )}
-          {file && isProcessing && (
-            <p className="mt-4 text-green-500 dark:text-green-400">
-              File "{file.name}" {message}
-            </p>
+          { message && isProcessing && file && (
+            <p className="mt-4 text-orange-500 dark:text-orange-400">{message}</p>
+          )}
+          {message && isConverted && (
+            <p className="mt-4 text-green-500 dark:text-green-400">{message}</p>
           )}
           <p
             className="mt-4  text-sm md:text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto
