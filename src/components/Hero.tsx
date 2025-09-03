@@ -132,10 +132,7 @@ export default function Hero() {
         </p>
       </div>
 
-      <div
-        className="panel flex items-center justify-center rounded-3xl w-[85%] sm:w-[60%] mx-auto bg-gray-200  dark:bg-gray-800  border-3 border-gray-400  dark:border-gray-700  border-dashed py-6 "
-        onClick={handleButtonClick}
-      >
+      <div className="panel flex items-center justify-center rounded-3xl w-[85%] sm:w-[60%] mx-auto bg-gray-200  dark:bg-gray-800  border-3 border-gray-400  dark:border-gray-700  border-dashed py-6 ">
         <div className=" flex flex-col items-center justify-center px-6 ">
           <input
             type="file"
@@ -145,7 +142,8 @@ export default function Hero() {
           />
           <button
             disabled={isProcessing}
-            className={`bg-tforange  md:text-xl text-white font-bold rounded-xl py-4 px-5 sm:px-10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tforange transition-colors cursor-pointer hover:bg-orange-500
+            onClick={handleButtonClick}
+            className={`bg-tforange  md:text-xl text-white font-bold rounded-xl py-6 px-5 sm:px-10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tforange transition-colors cursor-pointer hover:bg-orange-500
               `}
           >
             {isProcessing ? (
