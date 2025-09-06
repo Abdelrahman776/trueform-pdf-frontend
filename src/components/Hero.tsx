@@ -5,7 +5,7 @@ import { UploadCloud } from "lucide-react";
 // import axios from "axios";
 
 // async function uploadFile(file: File) {
-//   const endpoint = import.meta.env.SERVER_URL || "http://localhost:7777/";
+//   const endpoint = import.meta.env.SERVER_URL || "http://localhost:8000/";
 //   const formData = new FormData();
 //   formData.append("uploadedFile", file);
 //   const response = await axios.post(endpoint, formData);
@@ -25,7 +25,7 @@ export default function Hero() {
   const [message, setMessage] = useState<string | null>(null);
   //   const { mutate, isPending, data, error } =  useMutation(dd,uploadFile)
 
-  const handleFileInput = (file: File) => {
+  const handleFileInput = (file: File): void => {
     setFile(null);
     setIsProcessing(false);
     setMessage(null);
@@ -105,12 +105,12 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="bg-tfwhite dark:bg-tfblack min-h-[85vh] pt-18 flex flex-col justify-start  gap-24">
+    <section className="bg-tfwhite dark:bg-tfblack flex min-h-[85vh] flex-col justify-start gap-24 pt-18">
       {/* Drag overlay */}
       {isDragging && (
-        <div className="fixed z-50 inset-0 backdrop-blur-sm bg-tfblue/20  flex items-center justify-center ">
-          <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg text-center">
-            <UploadCloud className="w-16 h-16 mx-auto mb-4 text-tforange" />
+        <div className="bg-tfblue/20 fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
+          <div className="rounded-lg bg-white p-8 text-center shadow-lg dark:bg-gray-800">
+            <UploadCloud className="text-tforange mx-auto mb-4 h-16 w-16" />
             <h2 className="text-2xl font-bold text-[#2A3A6A] dark:text-white">
               Drop your file anywhere
             </h2>
@@ -120,20 +120,20 @@ export default function Hero() {
           </div>
         </div>
       )}
-      <div className="max-w-5xl mx-auto text-center">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
+      <div className="mx-auto max-w-5xl text-center">
+        <h1 className="mb-6 text-3xl font-bold text-gray-900 sm:text-4xl md:text-5xl lg:text-6xl dark:text-white">
           Unlock Your Document's{" "}
-          <span className="text-tforanged ">trueform</span>
+          <span className="text-tforanged">trueform</span>
         </h1>
 
-        <p className="text-lg text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+        <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-700 dark:text-gray-300">
           Convert scanned PDFs and handwritten notes into searchable, editable,
           compressed digital PDFs powered by OCR and AI.
         </p>
       </div>
 
-      <div className="panel flex items-center justify-center rounded-3xl w-[85%] sm:w-[60%] mx-auto bg-gray-200  dark:bg-gray-800  border-3 border-gray-400  dark:border-gray-700  border-dashed py-6 ">
-        <div className=" flex flex-col items-center justify-center px-6 ">
+      <div className="panel mx-auto flex w-[85%] items-center justify-center rounded-3xl border-3 border-dashed border-gray-400 bg-gray-200 py-6 sm:w-[60%] dark:border-gray-700 dark:bg-gray-800">
+        <div className="flex flex-col items-center justify-center px-6">
           <input
             type="file"
             id="file-input"
@@ -143,13 +143,12 @@ export default function Hero() {
           <button
             disabled={isProcessing}
             onClick={handleButtonClick}
-            className={`bg-tforange  md:text-xl text-white font-bold rounded-xl py-6 px-5 sm:px-10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tforange transition-colors cursor-pointer hover:bg-orange-500
-              `}
+            className={`bg-tforange focus:ring-tforange cursor-pointer rounded-xl px-5 py-6 font-bold text-white transition-colors hover:bg-orange-500 focus:ring-2 focus:ring-offset-2 focus:outline-none sm:px-10 md:text-xl`}
           >
             {isProcessing ? (
-              <div className="flex items-center  flex-col ">
+              <div className="flex flex-col items-center">
                 <svg
-                  className="animate-spin -ml-1 mr-2 w-6 h-6 md:w-9 md:h-9  text-white"
+                  className="mr-2 -ml-1 h-6 w-6 animate-spin text-white md:h-9 md:w-9"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -171,31 +170,29 @@ export default function Hero() {
                 <span> Coverting...</span>
               </div>
             ) : (
-              <div className="flex items-center  flex-col ">
-                <UploadCloud className="w-6 h-6 md:w-9 md:h-9 inline"></UploadCloud>
-                <span> Click here to convert a PDF!</span>
+              <div className="flex flex-col items-center">
+                <UploadCloud className="inline h-6 w-6 md:h-9 md:w-9"></UploadCloud>
+                {/* <span> Click here to convert a PDF!</span> */}
+                <span> Click here to add you file</span>
               </div>
             )}
           </button>
           {message && !isProcessing && !isConverted && (
-            <p className="text-sm  md:text-lg mt-4 text-red-600 dark:text-red-400 font-semibold ">
+            <p className="mt-4 text-sm font-semibold text-red-600 md:text-lg dark:text-red-400">
               {message}
             </p>
           )}
           {message && isProcessing && file && (
-            <p className="text-sm  md:text-lg mt-4 text-orange-600 font-semibold dark:text-orange-400">
+            <p className="mt-4 text-sm font-semibold text-orange-600 md:text-lg dark:text-orange-400">
               {message}
             </p>
           )}
           {message && isConverted && (
-            <p className="text-sm  md:text-lg mt-4 text-green-600   font-semibold dark:text-green-400  ">
+            <p className="mt-4 text-sm font-semibold text-green-600 md:text-lg dark:text-green-400">
               {message}
             </p>
           )}
-          <p
-            className="mt-4  text-sm md:text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto
-           "
-          >
+          <p className="mx-auto mt-4 max-w-3xl text-sm text-gray-700 md:text-lg dark:text-gray-300">
             or drag & drop anywhere on this page
           </p>
         </div>
