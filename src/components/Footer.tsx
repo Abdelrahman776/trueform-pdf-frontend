@@ -6,51 +6,51 @@ export default function Footer() {
     {
       name: "About",
       href: " about ",
-      icon: <BookOpenIcon className="w-4 h-4" />,
+      icon: <BookOpenIcon className="h-4 w-4" />,
     },
     {
       name: "API Docs",
-      href: " api-docs",
-      icon: <BookOpenIcon className="w-4 h-4" />,
+      href: "http://127.0.0.1:8000/docs",
+      icon: <BookOpenIcon className="size-4" />,
     },
     {
       name: "Support Me",
       href: "https://ko-fi.com/abdelrahmanelsharkawy",
-      icon: <HeartIcon className="w-4 h-4" />,
+      icon: <HeartIcon className="h-4 w-4" />,
     },
     {
       name: "GitHub",
       href: "https://github.com/Abdelrahman776",
-      icon: <Github className="w-4 h-4" />,
+      icon: <Github className="h-4 w-4" />,
     },
     {
       name: "Contact me",
       href: "mailto:abdelrahmannkamal@gmail.com",
-      icon: <MailIcon className="w-4 h-4" />,
+      icon: <MailIcon className="h-4 w-4" />,
     },
   ];
   return (
     <footer className="bg-tfwhite dark:bg-tfblack py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center">
-          <div className="text-xl font-bold mb-4">
+          <div className="mb-4 text-xl font-bold">
             <span className="text-tfblue dark:text-tfblue">TrueForm</span>
             <span className="text-tforange dark:text-tforange">PDF</span>
           </div>
-          <div className="flex flex-wrap justify-center gap-4 mb-4 ">
+          <div className="mb-4 flex flex-wrap justify-center gap-4">
             {footerLinks.map((link, index) => (
               <a
                 key={index}
                 href={link.href}
                 target="_blank"
-                className="flex items-center px-3 py-1 text-sm text-gray-600 dark:text-gray-300  hover:text-tforange transition-colors"
+                className="hover:text-tforange flex items-center px-3 py-1 text-sm text-gray-600 transition-colors dark:text-gray-300"
               >
                 <span className="mr-1">{link.icon}</span>
                 {link.name}
               </a>
             ))}
           </div>
-          <div className="text-sm text-gray-500 dark:text-gray-400 pb-1">
+          <div className="pb-1 text-sm text-gray-500 dark:text-gray-400">
             Copyright © {currentYear} TrueForm PDF
           </div>
         </div>
