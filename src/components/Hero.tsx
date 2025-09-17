@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from "react";
-// import { useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
+import { uploadFile } from "../api";
 
 import { UploadCloud } from "lucide-react";
-// import axios from "axios";
-
-// async function uploadFile(file: File) {
-//   const endpoint = import.meta.env.SERVER_URL || "http://localhost:8000/";
-//   const formData = new FormData();
-//   formData.append("uploadedFile", file);
-//   const response = await axios.post(endpoint, formData);
-
-//   return response.data;
-// }
 
 function handleButtonClick() {
   document.getElementById("file-input")?.click();
@@ -20,17 +11,18 @@ function handleButtonClick() {
 export default function Hero() {
   const [isDragging, setIsDragging] = useState(false);
   const [file, setFile] = useState<File | null>(null);
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [isConverted, setIsConverted] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
-  //   const { mutate, isPending, data, error } =  useMutation(dd,uploadFile)
 
-  const handleFileInput = (file: File): void => {
-    setFile(null);
-    setIsProcessing(false);
-    setMessage(null);
-    setIsConverted(false);
+  const { mutate, isPending, isSuccess, isError, error } = useMutation({
+    mutationFn: uploadFile,
+    onSuccess: (data) => {
+      console.log("Upload successful:", data);
+    },
+    onError: (error) => {
+      console.error("Upload error:", error);
+    },
+  });
 
+  const handleFileInput = (selectedFile: File): void => {
     const validTypes = [
       "application/pdf",
       "image/jpeg",
@@ -38,20 +30,12 @@ export default function Hero() {
       "image/png",
     ];
 
-    if (!validTypes.includes(file.type)) {
-      setMessage("Please upload a PDF, JPG, or PNG file.");
+    if (!validTypes.includes(selectedFile.type)) {
+      alert("Please upload a PDF, JPG, or PNG file."); // Using alert for simplicity
       return;
     }
-    setFile(file);
-    setIsProcessing(true);
-    setMessage(`${file.name}" is being processed`);
-
-    // In a real app, you would handle the file upload and conversion here
-    setTimeout(() => {
-      setMessage(`${file.name}" finished processing`);
-      setIsProcessing(false);
-      setIsConverted(true);
-    }, 2000);
+    setFile(selectedFile);
+    mutate(selectedFile);
   };
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -102,7 +86,7 @@ export default function Hero() {
       document.removeEventListener("dragleave", handleDragLeave);
       document.removeEventListener("drop", handleDrop);
     };
-  }, []);
+  });
 
   return (
     <section className="bg-tfwhite dark:bg-tfblack flex min-h-[85vh] flex-col justify-start gap-24 pt-18">
@@ -139,13 +123,14 @@ export default function Hero() {
             id="file-input"
             className="hidden"
             onChange={handleFileChange}
+            accept=".pdf,.jpg,.jpeg,.png"
           />
           <button
-            disabled={isProcessing}
+            disabled={isPending}
             onClick={handleButtonClick}
             className={`bg-tforange focus:ring-tforange cursor-pointer rounded-xl px-5 py-6 font-bold text-white transition-colors hover:bg-orange-500 focus:ring-2 focus:ring-offset-2 focus:outline-none sm:px-10 md:text-xl`}
           >
-            {isProcessing ? (
+            {isPending ? (
               <div className="flex flex-col items-center">
                 <svg
                   className="mr-2 -ml-1 h-6 w-6 animate-spin text-white md:h-9 md:w-9"
@@ -167,31 +152,34 @@ export default function Hero() {
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   ></path>
                 </svg>
-                <span> Coverting...</span>
+                <span>Converting...</span>
               </div>
             ) : (
               <div className="flex flex-col items-center">
                 <UploadCloud className="inline h-6 w-6 md:h-9 md:w-9"></UploadCloud>
-                {/* <span> Click here to convert a PDF!</span> */}
-                <span> Click here to add you file</span>
+                <span>Click here to add your file</span>
               </div>
             )}
           </button>
-          {message && !isProcessing && !isConverted && (
+
+          {isError && (
             <p className="mt-4 text-sm font-semibold text-red-600 md:text-lg dark:text-red-400">
-              {message}
+              Error: {error.message}
             </p>
           )}
-          {message && isProcessing && file && (
+
+          {isPending && file && (
             <p className="mt-4 text-sm font-semibold text-orange-600 md:text-lg dark:text-orange-400">
-              {message}
+              Processing "{file.name}"...
             </p>
           )}
-          {message && isConverted && (
+
+          {isSuccess && file && (
             <p className="mt-4 text-sm font-semibold text-green-600 md:text-lg dark:text-green-400">
-              {message}
+              "{file.name}" finished processing!
             </p>
           )}
+
           <p className="mx-auto mt-4 max-w-3xl text-sm text-gray-700 md:text-lg dark:text-gray-300">
             or drag & drop anywhere on this page
           </p>
