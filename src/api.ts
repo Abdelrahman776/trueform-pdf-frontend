@@ -1,5 +1,5 @@
 export async function uploadFile(file: File) {
-  const baseUrl = import.meta.env.SERVER_URL || "http://localhost:8000/";
+  const baseUrl = import.meta.env.VITE_SERVER_URL ;
   const uploadUrl = baseUrl + "upload/";
   const formData = new FormData();
   formData.append("file", file);

@@ -11,7 +11,7 @@ function handleButtonClick() {
 export default function Hero() {
   const [isDragging, setIsDragging] = useState(false);
   const [file, setFile] = useState<File | null>(null);
-
+// make the response a link in a seperate component on the left side or above the pane to download the pdf file when you click it show the pdf file in a new tab
   const { mutate, isPending, isSuccess, isError, error } = useMutation({
     mutationFn: uploadFile,
     onSuccess: (data) => {
