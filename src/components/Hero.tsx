@@ -57,6 +57,7 @@ export default function Hero() {
 
     const handleDragOver = (e: DragEvent) => {
       e.preventDefault(); // Essential for enabling drop
+      if (dragCounter === 0) setIsDragging(false);
     };
 
     const handleDragLeave = (e: DragEvent) => {
@@ -86,7 +87,7 @@ export default function Hero() {
       document.removeEventListener("dragleave", handleDragLeave);
       document.removeEventListener("drop", handleDrop);
     };
-  });
+  }, [handleFileInput]);
 
   return (
     <section className="bg-tfwhite dark:bg-tfblack flex min-h-[85vh] flex-col justify-start gap-24 pt-18">
