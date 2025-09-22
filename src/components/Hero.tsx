@@ -87,7 +87,7 @@ export default function Hero() {
       document.removeEventListener("dragleave", handleDragLeave);
       document.removeEventListener("drop", handleDrop);
     };
-  }, [handleFileInput]);
+  }, []);
 
   return (
     <section className="bg-tfwhite dark:bg-tfblack flex min-h-[85vh] flex-col justify-start gap-24 pt-18">
