@@ -27,3 +27,4 @@ boilerplate.jsx
 *.sln
 *.sw?
 *.ini
+*.pyc
