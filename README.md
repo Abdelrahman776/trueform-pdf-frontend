@@ -21,3 +21,7 @@
  8) Error states: Handle upload/processing errors with toasts (shadcn/ui <Toast/>).
  
   -->
+
+  to run frontend pnpm run dev 
+  to run backend uv run dev 
+  uv run uvicorn main:app --reload
