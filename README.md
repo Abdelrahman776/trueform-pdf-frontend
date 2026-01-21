@@ -22,6 +22,11 @@
  
   -->
 
-  to run frontend pnpm run dev 
-  to run backend uv run dev 
-  uv run uvicorn main:app --reload
+## Run frontend 
+pnpm run dev 
+
+## Active backend environment 
+.\.venv\Scripts\activate
+## Run backend 
+uv run python -m uvicorn main:app --reload
+
