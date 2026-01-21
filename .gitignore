@@ -26,3 +26,4 @@ boilerplate.jsx
 *.njsproj
 *.sln
 *.sw?
+*.ini
